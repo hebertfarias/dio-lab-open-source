@@ -1,0 +1,66 @@
+Fazer push de commits para um repositório remote
+Use git push para fazer push de commits de seu branch local para um repositório remoto.
+
+Neste artigo
+Sobre o git push
+Renomear branches
+Lidar com erros "non-fast-forward"
+Fazer push de tags
+Excluir uma tag ou branch remote
+Remotes e bifurcações
+Leitura adicional
+Sobre o git push
+O comando git push usa dois argumentos:
+
+Um nome de repositório remoto, por exemplo, origin
+Um nome de branch, por exemplo, main
+Por exemplo:
+
+git push REMOTE-NAME BRANCH-NAME
+Por exemplo, em geral, git push origin main é executado para efetuar push das alterações locais para o repositório online.
+
+Renomear branches
+Para renomear um branch, use o mesmo comando git push, mas adicione mais um argumento: o nome do novo branch. Por exemplo:
+
+git push REMOTE-NAME LOCAL-BRANCH-NAME:REMOTE-BRANCH-NAME
+Isso efetua push do LOCAL-BRANCH-NAME para o REMOTE-NAME, mas ele é renomeado como REMOTE-BRANCH-NAME.
+
+Lidar com erros "non-fast-forward"
+Se a cópia local de um repositório estiver fora de sincronia ou "atrasado" em relação ao repositório upstream do qual você está efetuando push, você receberá a mensagem non-fast-forward updates were rejected. Isso significa que você precisa recuperar ou "buscar" as alterações upstream antes de conseguir efetuar push das alterações locais.
+
+Para saber mais sobre esse erro, confira "Lidar com erros non-fast-forward".
+
+Fazer push de tags
+Por padrão, e sem parâmetros adicionais, git push envia todos os branches correspondentes que têm os mesmos nomes dos branches remotos.
+
+Para fazer push de uma única tag, você pode usar o mesmo comando usado para fazer push de um branch:
+
+git push REMOTE-NAME TAG-NAME
+Para fazer push de todas as suas tags, digite o comando:
+
+git push REMOTE-NAME --tags
+Excluir uma tag ou branch remote
+À primeira vista, a sintaxe para excluir um branch é um pouco enigmática:
+
+git push REMOTE-NAME :BRANCH-NAME
+Observe que há um espaço antes dos dois pontos. O comando se parece com as mesmas etapas que você usará para renomear um branch. No entanto, aqui, você está informando o Git para não efetuar push de nada para BRANCH-NAME no REMOTE-NAME. Por isso, git push exclui o branch do repositório remoto.
+
+Remotes e bifurcações
+Talvez você já saiba que pode "criar forks" de repositórios no GitHub.
+
+Ao clonar um repositório de sua propriedade, você fornece uma URL remota que informa ao Git o local em que ele deve efetuar fetch e push das atualizações. Caso deseje colaborar com o repositório original, adicione uma nova URL remota, normalmente chamada upstream, ao clone do Git local:
+
+git remote add upstream THEIR_REMOTE_URL
+Agora, você pode buscar as atualizações e os branches do fork deles:
+
+git fetch upstream
+# Grab the upstream remote's branches
+> remote: Counting objects: 75, done.
+> remote: Compressing objects: 100% (53/53), done.
+> remote: Total 62 (delta 27), reused 44 (delta 9)
+> Unpacking objects: 100% (62/62), done.
+> From https://github.com/OCTOCAT/REPO
+>  * [new branch]      main     -> upstream/main
+Quando terminar de fazer alterações locais, efetue push do branch local para o GitHub e inicie uma solicitação de pull.
+
+Fonte: https://docs.github.com/pt/get-started/using-git/pushing-commits-to-a-remote-repository
